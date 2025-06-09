@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="index.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Matrices</h1> 
+        <div>
+            <label for="matrixSize">Tamaño de la matriz:</label>
+            <select id="matrixSize">
+                <option value="2">2x2</option>
+                <option value="3" selected>3x3</option>
+                <option value="4">4x4</option>
+                <option value="5">5x5</option>
+                <option value="6">6x6</option>
+                <option value="7">7x7</option>
+                <option value="8">8x8</option>
+                <option value="9">9x9</option>
+                <option value="10">10x10</option>
+            </select>
+        </div>
+
+        <div class="matrices-section">
+            <div class="matrix-container">
+                <div class="matrix-title">Matriz A</div>
+                <div class="matrix-actions">
+                    <button class="btn btn-generator" onclick="generateRandomMatrix('A')">Generar</button>
+                    <button class="btn btn-danger" onclick="clearMatrix('A')">Limpiar</button>
+                </div>
+            </div>
+
+            <div class="matrix-container">
+                <div class="matrix-title">Matriz B</div>
+                <div class="matrix-actions">
+                    <button class="btn btn-generator" onclick="generateRandomMatrix('B')">Generar</button>
+                    <button class="btn btn-clean" onclick="clearMatrix('B')">Limpiar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="operation-section">
+            <h3>Operaciones Disponibles</h3>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="performOperation('add')">Sumar Matrices</button>
+            </div>
+        </div>
+
+        <div id="messages"></div>
+        <div id="result" class="result-section hidden"></div>
+    </div>
+</body>
+</html>

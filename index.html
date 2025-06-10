@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="index.js"></script>
+<script src="script.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Calculadora de Matrices</h1> 
-        <div>
+        <div class="size-selector">
             <label for="matrixSize">Tamaño de la matriz:</label>
             <select id="matrixSize">
                 <option value="2">2x2</option>
@@ -24,33 +24,39 @@
             </select>
         </div>
 
-        <div class="matrices-section">
-            <div class="matrix-container">
-                <div class="matrix-title">Matriz A</div>
+        <div class="main-content">
+            <div class="matrix-section">
+                <h3 class="matrix-title">Matriz A</h3>
                 <div class="matrix-actions">
                     <button class="btn btn-generator" onclick="generateRandomMatrix('A')">Generar</button>
-                    <button class="btn btn-danger" onclick="clearMatrix('A')">Limpiar</button>
+                    <button class="btn btn-example" onclick="fillExampleMatrix('A')">Ejemplo</button>
+                    <button class="btn btn-clean" onclick="clearMatrix('A')">Limpiar</button>
                 </div>
             </div>
 
-            <div class="matrix-container">
-                <div class="matrix-title">Matriz B</div>
+            <div class="operation-panel">
+                <h3 class="operations-title">Operaciones</h3>
+                <button class="operation-btn" onclick="performOperation('add')">A + B</button>
+                <button class="operation-btn" onclick="performOperation('subtract')">A - B</button>
+                <button class="operation-btn" onclick="performOperation('multiply')">A × B</button>
+            </div>
+
+            <div class="matrix-section">
+                <h3 class="matrix-title">Matriz B</h3>
                 <div class="matrix-actions">
                     <button class="btn btn-generator" onclick="generateRandomMatrix('B')">Generar</button>
+                    <button class="btn btn-example" onclick="fillExampleMatrix('A')">Ejemplo</button>
                     <button class="btn btn-clean" onclick="clearMatrix('B')">Limpiar</button>
                 </div>
             </div>
         </div>
 
-        <div class="operation-section">
-            <h3>Operaciones Disponibles</h3>
-            <div class="controls">
-                <button class="btn btn-primary" onclick="performOperation('add')">Sumar Matrices</button>
-            </div>
-        </div>
 
-        <div id="messages"></div>
-        <div id="result" class="result-section hidden"></div>
+        <div class="result-section" id="resultSection">
+            <h3 class="result-title">Resultado</h3>
+            <div id="resultMatrix" class="result-matrix"></div>
+            <div id="resultMessage"></div>
+        </div>
     </div>
 </body>
 </html>

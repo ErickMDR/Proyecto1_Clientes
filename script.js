@@ -36,3 +36,32 @@ function generateRandomMatrix(matrixId) {
         input.value = Math.floor(Math.random() * 21) - 10;
     });
 }
+
+function clearMatrix(matrixId) {
+    const matrixContainer = document.getElementById(`matrix${matrixId}`);
+    const inputs = matrixContainer.querySelectorAll("input");
+    inputs.forEach(input => input.value = "");
+}
+
+function fillExampleMatrix(matrixId) {
+    const examples = {
+        2: [[1, 2], [3, 4]],
+        3: [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+        4: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]
+    };
+
+    const size = parseInt(document.getElementById("matrixSize").value);
+    const matrixContainer = document.getElementById(`matrix${matrixId}`);
+    const inputs = matrixContainer.querySelectorAll("input");
+
+    if (!examples[size]) {
+        alert("No hay ejemplo disponible para este tamaño.");
+        return;
+    }
+
+    const example = examples[size].flat();
+
+    inputs.forEach((input, i) => {
+        input.value = example[i] !== undefined ? example[i] : 0;
+    });
+}

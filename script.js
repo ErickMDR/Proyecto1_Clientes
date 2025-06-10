@@ -100,30 +100,33 @@ function performOperation(operation) {
     }
 
     let result = [];
-
-    switch (operation) {
-        case "add":
-            result = A.map((row, i) => row.map((val, j) => val + B[i][j]));
-            break;
-        case "subtract":
-            result = A.map((row, i) => row.map((val, j) => val - B[i][j]));
-            break;
-        case "inverseSubtract":
-            result = B.map((row, i) => row.map((val, j) => val - A[i][j]));
-            break; 
-        case "multiply":
-            result = Array(size).fill().map(() => Array(size).fill(0));
-            for (let i = 0; i < size; i++) {
-                for (let j = 0; j < size; j++) {
-                    for (let k = 0; k < size; k++) {
-                        result[i][j] += A[i][k] * B[k][j];
+    try{
+        switch (operation) {
+            case "add":
+                result = A.map((row, i) => row.map((val, j) => val + B[i][j]));
+                break;
+            case "subtract":
+                result = A.map((row, i) => row.map((val, j) => val - B[i][j]));
+                break;
+            case "inverseSubtract":
+                result = B.map((row, i) => row.map((val, j) => val - A[i][j]));
+                break; 
+            case "multiply":
+                result = Array(size).fill().map(() => Array(size).fill(0));
+                for (let i = 0; i < size; i++) {
+                    for (let j = 0; j < size; j++) {
+                        for (let k = 0; k < size; k++) {
+                            result[i][j] += A[i][k] * B[k][j];
+                        }
                     }
                 }
+                break;
             }
-            break;
+        displayResult(result);
+        showMessage("Operación realizada con éxito.");
+    } catch(error){
+        showMessage("Error durante la operación: " + error.message, true);
     }
-
-    displayResult(result);
 }
 
 function displayResult(matrix) {
@@ -144,3 +147,10 @@ function displayResult(matrix) {
         resultContainer.appendChild(cell);
     });
 }
+
+function showMessage(message, isError = false) {
+    const resultMessage = document.getElementById("resultMessage");
+    resultMessage.textContent = message;
+    resultMessage.className = isError ? "error" : "";
+}
+

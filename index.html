@@ -35,11 +35,20 @@
                 </div>
             </div>
 
-            <div class="operation-panel">
+            <div class="operations-panel">
                 <h3 class="operations-title">Operaciones</h3>
                 <button class="operation-btn" onclick="performOperation('add')">A + B</button>
                 <button class="operation-btn" onclick="performOperation('subtract')">A - B</button>
                 <button class="operation-btn" onclick="performOperation('multiply')">A × B</button>
+                <div style="visibility:hidden;"></div>
+                <button class="operation-btn" onclick="performScalarMultiplication()">Escalar</button>
+                <input id="scalarInput" type="number" class="scalar-input" placeholder="Escalar" />
+
+                <button class="operation-btn" onclick="transposeMatrix()">Tras(A)</button>
+                <button class="operation-btn" onclick="calculateDeterminant()">Det(A)</button>
+                <button class="operation-btn" onclick="calculateInverse()">Inv(A)</button>
+                <button class="operation-btn" onclick="showIdentityMatrix()">Ident</button>
+
             </div>
 
             <div class="matrix-section">

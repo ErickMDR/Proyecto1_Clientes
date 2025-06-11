@@ -50,20 +50,26 @@ function clearMatrix(matrixId) {
 }
 
 function fillExampleMatrix(matrixId) {
-    const examples = {
-        2: [[1, 2], [3, 4]],
-        3: [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-        4: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]
-    };
+    const examples = {};
+    
+    for (let size = 2; size <= 10; size++) {
+        const matrix = [];
+        let counter = 1;
+        
+        for (let i = 0; i < size; i++) {
+            const row = [];
+            for (let j = 0; j < size; j++) {
+                row.push(counter++);
+            }
+            matrix.push(row);
+        }
+        
+        examples[size] = matrix;
+    }
 
     const size = parseInt(document.getElementById("matrixSize").value);
     const matrixContainer = document.getElementById(`matrix${matrixId}`);
     const inputs = matrixContainer.querySelectorAll("input");
-
-    if (!examples[size]) {
-        alert("No hay ejemplo disponible para este tamaño.");
-        return;
-    }
 
     const example = examples[size].flat();
 
@@ -154,3 +160,32 @@ function showMessage(message, isError = false) {
     resultMessage.className = isError ? "error" : "";
 }
 
+function performScalarMultiplication() {
+    const scalar = parseFloat(document.getElementById("scalarInput").value);
+    if (isNaN(scalar)) {
+        alert("Por favor, ingrese un escalar válido.");
+        return;
+    }
+    const A = getMatrixValues("A");
+    const result = A.map(row => row.map(val => Number((val * scalar).toFixed(2))));
+    displayResult(result);
+    showMessage(`La multiplicación por el escalar se ha calculado exitosamente.`);
+}
+
+function transposeMatrix() {
+    const A = getMatrixValues("A");
+    const size = A.length;
+    const transposed = Array(size).fill().map(() => Array(size).fill(0));
+
+    try{
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                transposed[j][i] = A[i][j];
+            }
+        }
+        displayResult(transposed);
+        showMessage(`La Transpuesta se ha calculado exitosamente.`);
+    } catch(error){
+        showMessage("Error durante la operación: " + error.message, true);
+    }
+}

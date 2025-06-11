@@ -130,8 +130,8 @@ function performOperation(operation) {
             }
         displayResult(result);
         showMessage("Operación realizada con éxito.");
-    } catch(error){
-        showMessage("Error durante la operación: " + error.message, true);
+    } catch {
+        showMessage("Error durante la operación: ", true);
     }
 }
 
@@ -185,8 +185,8 @@ function transposeMatrix() {
         }
         displayResult(transposed);
         showMessage(`La Transpuesta se ha calculado exitosamente.`);
-    } catch(error){
-        showMessage("Error durante la operación: " + error.message, true);
+    } catch {
+        showMessage("Error durante la operación: ", true);
     }
 }
 
@@ -208,8 +208,8 @@ function determinant(matrix) {
         }
         showMessage(`La Deteminante se ha calculado exitosamente.`);
         return det;
-    } catch(error){
-        showMessage("Error durante la operación: " + error.message, true);
+    } catch {
+        showMessage("Error durante la operación: ", true);
     }
 }
 
@@ -221,7 +221,7 @@ function showIdentityMatrix() {
         );
     displayResult(identity);
     showMessage(`Matriz identidad.`);
-    } catch(error){
-        showMessage("Error durante la operación: " + error.message, true);
+    } catch {
+        showMessage("Error durante la operación: ", true);
     }
 }

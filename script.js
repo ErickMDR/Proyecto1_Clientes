@@ -198,20 +198,30 @@ function calculateDeterminant() {
 
 function determinant(matrix) {
     const n = matrix.length;
-    if (n === 2) return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
-
-    let det = 0;
-    for (let col = 0; col < n; col++) {
-        const subMatrix = matrix.slice(1).map(row => row.filter((_, j) => j !== col));
-        det += ((col % 2 === 0 ? 1 : -1) * matrix[0][col] * determinant(subMatrix));
+    try{
+        if (n === 2) return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    
+        let det = 0;
+        for (let col = 0; col < n; col++) {
+            const subMatrix = matrix.slice(1).map(row => row.filter((_, j) => j !== col));
+            det += ((col % 2 === 0 ? 1 : -1) * matrix[0][col] * determinant(subMatrix));
+        }
+        showMessage(`La Deteminante se ha calculado exitosamente.`);
+        return det;
+    } catch(error){
+        showMessage("Error durante la operación: " + error.message, true);
     }
-    return det;
 }
 
 function showIdentityMatrix() {
     const size = parseInt(document.getElementById("matrixSize").value);
-    const identity = Array.from({ length: size }, (_, i) =>
-        Array.from({ length: size }, (_, j) => (i === j ? 1 : 0))
-    );
+    try{
+        const identity = Array.from({ length: size }, (_, i) =>
+            Array.from({ length: size }, (_, j) => (i === j ? 1 : 0))
+        );
     displayResult(identity);
+    showMessage(`Matriz identidad.`);
+    } catch(error){
+        showMessage("Error durante la operación: " + error.message, true);
+    }
 }

@@ -225,3 +225,45 @@ function showIdentityMatrix() {
         showMessage("Error durante la operación: ", true);
     }
 }
+
+function calculateInverse() {
+    const A = getMatrixValues("A");
+    const inv = inverse(A);
+    if (!inv) {
+        const det = 0;
+        showMessage("La matriz A no es invertible.", true);
+        return displayResult([[det]]);;
+    } else {
+        displayResult(inv);
+        showMessage(`La Inversa se ha calculado exitosamente.`);
+    }
+}
+
+function inverse(matrix) {
+    const n = matrix.length;
+    const det = determinant(matrix);
+    if (Math.abs(det) < 1e-10) return null;
+
+    try {
+        const cofactorMatrix = Array.from({ length: n }, () => Array(n).fill(0));
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                const minor = matrix
+                    .filter((_, r) => r !== i)
+                    .map(row => row.filter((_, c) => c !== j));
+                const cofactor = determinant(minor) * ((i + j) % 2 === 0 ? 1 : -1);
+                cofactorMatrix[i][j] = cofactor;
+            }
+        }
+    
+        const adjugate = transpose(cofactorMatrix);
+    
+        return adjugate.map(row => row.map(val => Number((val / det).toFixed(2))));
+    } catch {
+        showMessage("Error durante la operación: ", true);
+    }
+}
+
+function transpose(matrix) {
+    return matrix[0].map((_, colIndex) => matrix.map(row => row[colIndex]));
+}
